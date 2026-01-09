@@ -7,9 +7,10 @@ __pycache__/
 venv/
 
 # Build output
-dist/
 build/
 *.egg-info/
+# Keep ha-dev-tools/frontend/dist/ for the add-on
+!/ha-dev-tools/frontend/dist/
 
 # IDE
 .idea/

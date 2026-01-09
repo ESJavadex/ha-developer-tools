@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HA Developer Tools</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            text-align: center;
+            padding: 2rem;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #00d4ff, #7b2ff7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .status {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+        .badge {
+            display: inline-block;
+            background: #7b2ff7;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+            max-width: 600px;
+        }
+        .feature {
+            background: rgba(255,255,255,0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        .coming-soon {
+            opacity: 0.6;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>HA Developer Tools</h1>
+        <p>Powerful developer dashboard for Home Assistant</p>
+
+        <div class="status">
+            <p>Backend Status: <span id="status">Checking...</span></p>
+            <span class="badge">v0.1.0 - Development</span>
+        </div>
+
+        <div class="features">
+            <div class="feature">Entity Explorer<div class="coming-soon">Coming Soon</div></div>
+            <div class="feature">Log Viewer<div class="coming-soon">Coming Soon</div></div>
+            <div class="feature">Service Caller<div class="coming-soon">Coming Soon</div></div>
+            <div class="feature">Automation Debugger<div class="coming-soon">Coming Soon</div></div>
+            <div class="feature">Config Validator<div class="coming-soon">Coming Soon</div></div>
+            <div class="feature">Template Playground<div class="coming-soon">Coming Soon</div></div>
+        </div>
+    </div>
+
+    <script>
+        fetch('/api/')
+            .then(r => r.json())
+            .then(data => {
+                document.getElementById('status').textContent = data.status === 'ok' ? 'Connected' : 'Error';
+                document.getElementById('status').style.color = data.status === 'ok' ? '#4ade80' : '#f87171';
+            })
+            .catch(() => {
+                document.getElementById('status').textContent = 'Disconnected';
+                document.getElementById('status').style.color = '#f87171';
+            });
+    </script>
+</body>
+</html>
